@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Court Data Fetcher</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center px-4">
+
+  <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-lg space-y-6">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-indigo-700">🔍 Court Data Fetcher</h2>
+      <p class="text-sm text-gray-500 mt-1">Enter case details to fetch metadata and judgments</p>
+    </div>
+
+    <form method="POST" action="/search" class="space-y-4">
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Court Complex</label>
+        <select
+          name="court_complex"
+          required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          <option value="District Court, Faridabad">High Court, Delhi</option>
+          <!-- Add more locations as needed -->
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Case Type</label>
+        <select
+          name="case_type"
+          required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          <option value="">Select Case Type</option>
+          <option value="CA">CA - Civil Appeal</option>
+          <option value="CR">CR - Civil Revision</option>
+          <option value="CS">CS - Civil Suit</option>
+          <option value="#">W.P.(C)</option>
+          <!-- Add more as needed -->
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Case Number</label>
+        <input
+          type="number"
+          name="case_number"
+          required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          placeholder="e.g. 12345"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Filing Year</label>
+        <select
+          name="filing_year"
+          required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          {% for y in range(2024, 2014, -1) %}
+            <option value="{{ y }}">{{ y }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg shadow-md transition"
+      >
+        Fetch Case
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
